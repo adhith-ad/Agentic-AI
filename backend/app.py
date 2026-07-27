@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from ollama import chat
+from backend.agent.agent import ask_agent
 
 app = FastAPI()
 
@@ -8,17 +8,6 @@ def home():
     return {"message": "Agentic AI is running"}
 
 @app.get("/chat")
-def chatbot(question: str):
-    response = chat(
-        model="llama3.1:8b",
-        messages=[
-            {
-                "role": "user",
-                "content": question
-            }
-        ]
-    )
-
-    return {
-        "answer": response["message"]["content"]
-    }
+def chat(question: str):
+    answer = ask_agent(question)
+    return {"answer": answer}

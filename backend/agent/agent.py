@@ -1,6 +1,6 @@
 import ollama
 
-def ask_llm(question):
+def ask_agent(question):
     response = ollama.chat(
         model="llama3.1:8b",
         messages=[
